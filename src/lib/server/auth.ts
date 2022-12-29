@@ -4,13 +4,13 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import client from '$lib/server/client';
 import { User } from '$lib/types/user';
-import { RequestEvent } from './$types';
+import type { RequestEvent } from '@sveltejs/kit';
 
-export function compare(encrypted: string, password: string): boolean {
-  return encrypt(password) === encrypted;
+export async function compare(encrypted: string, password: string): boolean {
+  return await encrypt(password) === encrypted;
 }
 
-export function encrypt(password: string) {
+export function encrypt(password: string): Promise<string> {
   return new Promise<string>((res, rej) => {
     crypto.scrypt(password, SECRET, 32, (error, buffer) => {
       if(error) rej(error);

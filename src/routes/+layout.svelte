@@ -33,6 +33,13 @@
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif;
   }
+
+  :global(.link) {
+    color: var(--link-color);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
 </style>
 
 {#if !data.isPublic}

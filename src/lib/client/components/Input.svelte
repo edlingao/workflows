@@ -36,6 +36,6 @@
 
 <label class="Input">
   <span>{title}</span>
-  <input {type} name={title} on:input={onInput} placeholder={title} {value}/>
+  <input {type} name={title.toLowerCase()} on:input={onInput} placeholder={title} {value}/>
 </label>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { logout } from "$lib/client/stores/auth";
 	import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -13,3 +14,5 @@
     <p>Password: {password}</p>
   </div>
 {/each}
+
+<button on:click={() => logout()}>Logout</button>
