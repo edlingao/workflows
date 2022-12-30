@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String
+  password  String
+  tasks     Task[]
+  workflows Workflow[]
+}
+
+model Workflow {
+  id        String   @id @default(cuid())
+  name      String
+  weekDays  String[]
+  startDate DateTime
+  endDate   DateTime
+  userId    String
+  tasks     Task[]
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Task {
+  id           String   @id @default(cuid())
+  title        String
+  completed    Boolean
+  autocomplete Boolean
+  workflowId   String
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  workflow     Workflow @relation(fields: [workflowId], references: [id])
+}
