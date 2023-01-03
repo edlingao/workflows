@@ -1,10 +1,11 @@
 
 const guardRoutes = [
-  "/users"
+  "/users",
+  "/",
 ];
 
 export function isGuarded(urlObj: URL): boolean {
-  return guardRoutes.some(url => urlObj.pathname.endsWith(url));
+  return guardRoutes.some(url => urlObj.pathname === url);
 }
 
 export default guardRoutes;

@@ -32,8 +32,6 @@ export const POST = async (event: RequestEvent) => {
           key: 'auth-x',
           value: token,
           path: '/',
-          httpOnly: true,
-          sameSite: 'strict',
           secure: process.env.NODE_ENV === 'production',
           maxAge: 60 * 60 * 24 * 7, // one week
         }

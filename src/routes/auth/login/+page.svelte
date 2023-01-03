@@ -24,7 +24,7 @@
 
       refresh(token, user as User);
 
-      goto('/users');
+      goto('/');
     }
   }
 

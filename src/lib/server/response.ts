@@ -32,9 +32,9 @@ export default function WorkflowsResponseApi({
 }: WorkflowProps) {
   const serializedCookie = cookie ?
     serialize(cookie.key, cookie.value, {
-      path: cookie.path || '/',
-      httpOnly: cookie.httpOnly,
-      sameSite: cookie.sameSite || 'strict',
+      path: '/',
+      httpOnly: true,
+      sameSite: 'strict',
       secure: cookie.secure || process.env.NODE_ENV === 'production',
       maxAge: cookie.maxAge || 60 * 60 * 24 * 7,
     }) :

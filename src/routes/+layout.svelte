@@ -1,6 +1,16 @@
 <script lang="ts">
-  export let data: {isPublic: boolean};
+	import { browser } from "$app/environment";
+	import { goto } from "$app/navigation";
+	import MainMenu from "$lib/client/components/MainMenu.svelte";
+	import type { User } from "@prisma/client";
 
+
+  export let data: {isPublic: boolean, user: User};
+
+
+  if(browser && !data.user) {
+    goto('/auth/login');
+  }
 </script>
 
 <style lang="scss">
@@ -40,13 +50,25 @@
     text-decoration: none;
   }
   
+  .Index {
+    width: 100%;
+    height: 100%;
+    
+
+    display: flex;
+  }
 </style>
 
-{#if !data.isPublic}
-  <nav class="main-navigation">
-    <ul>
-      <li>Hola</li>
-    </ul>
-  </nav>
+{#if data.user}
+  <div class="Index">
+    <div class="menu-container">
+      <MainMenu />
+    </div>
+    <main class="main-section">
+      <slot></slot>
+    </main>
+  </div>
+
+{:else}
+  <slot />
 {/if}
-<slot></slot>
