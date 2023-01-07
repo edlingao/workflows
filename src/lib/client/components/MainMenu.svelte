@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
-	import { navigating, page } from "$app/stores";
+	import { page } from "$app/stores";
   import Logo from "$lib/client/components/Logo.svelte";
 	import { logout } from "$lib/client/stores/auth";
 	import IconButton from "./IconButton.svelte";
@@ -12,11 +12,36 @@
     users = "/users",
   };
 
+  interface RouteObj {
+    route: Routes;
+    icon: "book" | "home" | "settings" | "logout" | "view_week" | null;
+    label: string;
+  }
+
+
   const handleLogout = () => {
     if(browser) {
       logout();
     }
   };
+
+  const routes: RouteObj[] = [
+    {
+      route: Routes.home,
+      icon: "home",
+      label: "Home",
+    },
+    {
+      route: Routes.week,
+      icon: "view_week",
+      label: "Week View",
+    },
+    {
+      route: Routes.workflows,
+      icon: "book",
+      label: "Workflows",
+    },
+  ]
 
 </script>
 
@@ -44,13 +69,18 @@
     <Logo small/>
   </div>
   <nav class="menu-nav">
-    <IconButton icon="home" href="/" selected={$page.url.pathname === Routes.home} />
-    <IconButton icon="view_week" href="/weekView" selected={$page.url.pathname === Routes.week}/>
-    <IconButton icon="book" href="/workflows" selected={$page.url.pathname === Routes.workflows}/>
+    {#each routes as route}
+      <IconButton
+        icon="{route.icon}"
+        label="{route.label}"
+        href="{route.route}"
+        selected={$page.url.pathname === route.route}
+      />
+    {/each}
   </nav>
 
   <div class="menu-footer">
-    <IconButton icon="settings"/>
+    <IconButton icon="settings" href="/settings"/>
     <IconButton icon="logout" onClick={handleLogout}/>
   </div>
 </div>
