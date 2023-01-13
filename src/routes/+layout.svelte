@@ -25,6 +25,7 @@
     --white-rgb: 255, 255, 255;
     --alpha: 0.5;
     --radius: 5px;
+    --green: #037C3B;
   }
 
   :global(body) {
@@ -53,10 +54,16 @@
   .Index {
     width: 100%;
     height: 100%;
-    
 
     display: flex;
   }
+
+  .main-section {
+    width: 100%;
+    height: 100%;
+    padding: 1.875rem;
+  }
+
 </style>
 
 {#if data.user}
